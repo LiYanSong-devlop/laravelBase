@@ -31,8 +31,6 @@ class UserController extends Controller
         if (empty($request_data['nickname'])) {
             $request_data['nickname'] = $request_data['user_name'];
         }
-        //密码加密
-        $request_data['password'] = bcrypt($request_data['password']);
         $this->service->create($request_data);
         return $this->success('添加管理员成功');
     }

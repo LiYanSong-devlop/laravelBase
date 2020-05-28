@@ -18,6 +18,18 @@ class AdminUser extends Authenticatable implements JWTSubject
         'password'
     ];
 
+    const MAIN = 1; //主体账号
+
+    public function compareIsMain()
+    {
+        return $this->is_main == self::MAIN;
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     public function getJWTCustomClaims()
     {
         return [

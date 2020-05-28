@@ -18,12 +18,26 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Base')->group(function () {
     //基础后台路由
     Route::namespace('Admin')->group(function () {
-        Route::post('admin/base/login', 'LoginController@login');  //后台登录
-        //登录后允许访问的路由
-        Route::middleware('jwt:api_admin')->group(function () {
-            Route::get('admin/base/user-info', 'UserController@detail');//当前用户详情
+        //后台登录
+        Route::post('admin/base/login', 'LoginController@login');
+        //登录后允许访问的路由 'role-permission'
+        Route::middleware(['jwt:api_admin',])->group(function () {
+            //当前用户详情
+            Route::get('admin/base/user-info', 'UserController@detail');
+            //添加管理员
+            Route::post('admin/base/user-store', 'UserController@store');
 
-            Route::post('admin/base/user-store', 'UserController@store');//添加管理员
+            /***角色 - 权限***/
+            Route::namespace('RolePermission')->group(function () {
+                //赋予其他管理员执行某个角色
+                Route::post('admin/base/admin-user-role', 'RoleController@setAdministratorRole');
+                //获取某个角色下面的权限
+                Route::get('admin/base/role-has-permission/{role}', 'RoleController@getPermissionByRole');
+                //角色相关基础功能
+                Route::resource('admin/base/role', 'RoleController');
+                //权限相关基础功能
+                Route::resource('admin/base/permission', 'PermissionController');
+            });
         });
 
     });

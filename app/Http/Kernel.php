@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\JWTAuthMiddleware;
+use App\Http\Middleware\RoutePermissionMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,5 +66,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt' => JWTAuthMiddleware::class,
+        'role-permission' => RoutePermissionMiddleware::class,
     ];
 }

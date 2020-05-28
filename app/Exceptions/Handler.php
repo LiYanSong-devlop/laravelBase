@@ -12,6 +12,7 @@ use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Spatie\Permission\Exceptions\UnauthorizedException as PermissionException;
 
 class Handler extends ExceptionHandler
 {
@@ -61,6 +62,9 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof UnauthorizedHttpException) {
             return $this->failed('请重新登录', 401);
+        }
+        if ($exception instanceof PermissionException) {
+            return $this->failed('没有权限', 400);
         }
 
         if ($exception instanceof TokenInvalidException) {

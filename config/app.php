@@ -164,6 +164,9 @@ return [
 
         Overtrue\LaravelLang\TranslationServiceProvider::class,
 
+        //权限
+        Spatie\Permission\PermissionServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
