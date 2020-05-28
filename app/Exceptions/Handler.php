@@ -3,12 +3,12 @@
 namespace App\Exceptions;
 
 use App\Traits\ApiResponse;
-use Dotenv\Exception\ValidationException;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -22,7 +22,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        ApiException::class,
     ];
 
     /**

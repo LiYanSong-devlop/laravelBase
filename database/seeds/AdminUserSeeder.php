@@ -17,7 +17,7 @@ class AdminUserSeeder extends Seeder
             'nickname' => 'maxBoss',
             'position' => '',
             'avatar' => 'http://image.yy.com/yywebalbumbs2bucket/144152f8680f421599233c6ffcfcef49_1476265267104.jpeg',
-            'status' => 2,
+            'status' => 0,
         ]);
     }
 }

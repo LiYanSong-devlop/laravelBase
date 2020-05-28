@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//基础路由
+Route::namespace('Base')->group(function () {
+    //基础后台路由
+    Route::namespace('Admin')->group(function () {
+        Route::post('admin/base/login', 'LoginController@login');  //后台登录
+
+
+    });
 });

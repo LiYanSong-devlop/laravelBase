@@ -40,11 +40,15 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
-            'hash' => false,
+            //'hash' => false,
+
+        ],
+        'api_admin' => [
+            'driver' => 'jwt',
+            'provider' => 'admin_users',
         ],
     ],
 
@@ -66,10 +70,15 @@ return [
     */
 
     'providers' => [
+        'admin_users' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Base\AdminUser::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+
 
         // 'users' => [
         //     'driver' => 'database',
