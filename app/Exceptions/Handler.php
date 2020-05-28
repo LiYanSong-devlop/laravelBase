@@ -2,11 +2,20 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponse;
+use Dotenv\Exception\ValidationException;
+use GuzzleHttp\Exception\ConnectException;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\UnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponse;
     /**
      * A list of the exception types that are not reported.
      *
@@ -50,6 +59,38 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof UnauthorizedHttpException) {
+            return $this->failed('请重新登录', 401);
+        }
+
+        if ($exception instanceof TokenInvalidException) {
+            return $this->failed('用户未登录', 401);
+        }
+
+        if ($exception instanceof ValidationException) {
+            return $this->failed($exception->validator->errors()->first(), 400);
+        }
+
+        if ($exception instanceof ModelNotFoundException) {
+            return $this->failed('非法请求', 404);
+        }
+
+        if ($exception instanceof ApiException) {
+            return $this->failed($exception->msg, $exception->code);
+        }
+        if ($exception instanceof ConnectException) {
+            return $this->failed('创建失败，请稍候重试', 400);
+        }
+        if ($exception instanceof BindingResolutionException) {
+            return $this->failed($exception->getMessage(),500);
+        }
+        if ($exception instanceof UnauthorizedException) {
+            return $this->failed($exception->getMessage(),403);
+        }
+        if ($exception instanceof \Exception) {
+            return $this->failed($exception->getMessage());
+        }
+
         return parent::render($request, $exception);
     }
 }
