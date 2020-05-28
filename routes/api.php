@@ -19,7 +19,12 @@ Route::namespace('Base')->group(function () {
     //基础后台路由
     Route::namespace('Admin')->group(function () {
         Route::post('admin/base/login', 'LoginController@login');  //后台登录
+        //登录后允许访问的路由
+        Route::middleware('jwt:api_admin')->group(function () {
+            Route::get('admin/base/user-info', 'UserController@detail');//当前用户详情
 
+            Route::post('admin/base/user-store', 'UserController@store');//添加管理员
+        });
 
     });
 });
