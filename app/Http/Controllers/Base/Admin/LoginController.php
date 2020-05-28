@@ -17,6 +17,12 @@ class LoginController extends Controller
         auth()->shouldUse('api_admin');
     }
 
+    /**
+     * 后台管理员登录
+     * 密码错误三次后，不允许登录
+     * @param AdminLoginRequest $request
+     * @return mixed
+     */
     public function login(AdminLoginRequest $request)
     {
         $user_name = $request->get('username');
