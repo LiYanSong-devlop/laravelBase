@@ -10,13 +10,14 @@
     "require": {
         "php": "^7.2.5",
         "fideloper/proxy": "^4.2",
+        "freyo/flysystem-qcloud-cos-v5": "^2.0",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "tymon/jwt-auth": "1.*@rc",
         "overtrue/laravel-lang": "^3.0",
-        "spatie/laravel-permission": "^3.11"
+        "spatie/laravel-permission": "^3.11",
+        "tymon/jwt-auth": "1.*@rc"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

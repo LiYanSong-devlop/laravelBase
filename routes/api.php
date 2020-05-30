@@ -21,11 +21,13 @@ Route::namespace('Base')->group(function () {
         //后台登录
         Route::post('admin/base/login', 'LoginController@login');
         //登录后允许访问的路由 'role-permission'
-        Route::middleware(['jwt:api_admin',])->group(function () {
+        Route::middleware(['jwt:api_admin'])->group(function () {
             //当前用户详情
             Route::get('admin/base/user-info', 'UserController@detail');
             //添加管理员
             Route::post('admin/base/user-store', 'UserController@store');
+            //上传图片到腾讯云上的对象存储
+            Route::post('admin/base/upload', 'CommonController@upload');
 
             /***角色 - 权限***/
             Route::namespace('RolePermission')->group(function () {

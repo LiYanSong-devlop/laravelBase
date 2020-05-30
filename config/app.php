@@ -167,6 +167,9 @@ return [
         //权限
         Spatie\Permission\PermissionServiceProvider::class,
 
+        //cos-v5
+        Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
