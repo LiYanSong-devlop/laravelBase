@@ -64,6 +64,12 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        'admin' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'visibility' => 'public',
+            'url' => env('APP_URL').'/uploads',
+        ],
         'cosv5' => [
             'driver' => 'cosv5',
             'region'          => env('COSV5_REGION', 'ap-guangzhou'),

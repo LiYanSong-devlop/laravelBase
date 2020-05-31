@@ -27,7 +27,13 @@ class CommonController extends Controller
         if (!in_array($file->getMimeType(), ['image/jpeg', 'image/png'])) {
             return $this->failed('暂时仅支持jpeg和png格式的');
         }
-        $result = $this->service->upload($file);
+        switch (env('FILESYSTEM_DRIVER')) {
+            case 'cosv5':
+                $result = $this->service->uploadCos($file);
+                break;
+            case 'local':
+                $result = $this->service->uploadLocal($file);
+        }
         return $this->success($result);
     }
 }
