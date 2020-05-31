@@ -24,6 +24,12 @@ Route::namespace('Base')->group(function () {
         Route::middleware(['jwt:api_admin'])->group(function () {
             //当前用户详情
             Route::get('admin/base/user-info', 'UserController@detail');
+            //修改信息
+            Route::patch('admin/base/user-update', 'UserController@update');
+            //修改密码
+            Route::patch('admin/base/user-password', 'UserController@updatePass');
+            //重置密码
+            Route::patch('admin/base/user-reset-pass/{user_id}', 'UserController@resetPass');
             //添加管理员
             Route::post('admin/base/user-store', 'UserController@store');
             //上传图片到腾讯云上的对象存储

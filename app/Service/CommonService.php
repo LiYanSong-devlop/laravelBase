@@ -4,17 +4,9 @@
 namespace App\Service;
 
 
-use App\Models\Base\Image;
 
 class CommonService
 {
-    public $imagesModel;
-
-    public function __construct(Image $image)
-    {
-        $this->imagesModel = $image;
-    }
-
     public function uploadCos($file)
     {
         $dir_name = date("Ym", time()) . '/' . date("d");
