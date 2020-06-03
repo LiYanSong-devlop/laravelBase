@@ -11,7 +11,7 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\AdminUser::query()->create([
+        \App\Models\Base\AdminUser::query()->create([
             'user_name' => 'liysong',
             'password' => bcrypt('liysong'),
             'nickname' => 'maxBoss',
